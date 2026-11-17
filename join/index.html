@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Joining Project ACX</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column, a numbered path of six steps; the server card is the one boxed object */
+:root {
+  --bg: #eef0f3;
+  --surface: #ffffff;
+  --fg: #1d1f2b;
+  --muted: #5a5f72;
+  --rule: #d5d8e0;
+  --accent: #5a3fae;        /* portal violet */
+  --accent-soft: #e7e1f6;
+  --gold: #8a6a1f;
+  --font-display: "IM Fell English SC", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12131c; --surface: #1b1d2a; --fg: #e6e3da; --muted: #a3a6b8; --rule: #2e3142;
+    --accent: #a98cf0; --accent-soft: #2a2440; --gold: #d4b25e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12131c; --surface: #1b1d2a; --fg: #e6e3da; --muted: #a3a6b8; --rule: #2e3142;
+  --accent: #a98cf0; --accent-soft: #2a2440; --gold: #d4b25e; color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.6 var(--font-body);
+}
+.page {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding-block: 2.5rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 2.25rem;
+}
+header { display: grid; gap: .6rem; }
+.eyebrow {
+  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-weight: 700;
+}
+h1 {
+  font: 400 clamp(2.3rem, 7vw, 3.4rem)/1.05 var(--font-display);
+  margin: 0; text-wrap: balance;
+}
+.lede { margin: 0; color: var(--muted); max-width: 36rem; }
+h2 {
+  font: 400 1.55rem/1.2 var(--font-display); margin: 0; text-wrap: balance;
+}
+a { color: var(--accent); text-underline-offset: .18em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+.needs { display: grid; gap: .5rem; }
+.needs ul { margin: 0; padding-left: 1.2rem; display: grid; gap: .25rem; }
+
+ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.75rem; counter-reset: step; }
+ol.steps > li {
+  counter-increment: step;
+  display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0 1rem;
+}
+ol.steps > li::before {
+  content: counter(step);
+  font: 400 2.1rem/1 var(--font-display); color: var(--accent);
+  padding-top: .15rem; text-align: right;
+}
+.step { display: grid; gap: .5rem; min-width: 0; }
+.step h3 { margin: 0; font-size: 1.12rem; line-height: 1.35; }
+.step p { margin: 0; }
+.step ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .2rem; }
+.ui { font-weight: 700; }                      /* a button or field name on screen */
+ol.substeps { margin: 0; padding-left: 1.3rem; display: grid; gap: .45rem; }
+ol.substeps > li { padding-left: .2rem; }
+ol.substeps > li::marker { color: var(--muted); font-weight: 700; }
+.server.path { margin-top: .5rem; }
+.note { font-size: .92rem; color: var(--muted); }
+code {
+  font: 500 .88em var(--font-mono); background: var(--accent-soft); padding: .08em .35em; border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+
+.server {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+  padding: .4rem 1rem; display: grid;
+}
+.row {
+  display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) auto; align-items: center; gap: .75rem;
+  padding: .6rem 0; border-bottom: 1px solid var(--rule);
+}
+.row:last-child { border-bottom: 0; }
+.row .label { color: var(--muted); font-size: .9rem; }
+.row .value { font: 500 1.02rem var(--font-mono); overflow-wrap: anywhere; }
+.copy {
+  font: 700 .8rem var(--font-body); color: var(--accent); background: transparent;
+  border: 1px solid var(--rule); border-radius: 6px; padding: .3rem .7rem; cursor: pointer; min-width: 4.5rem;
+}
+.copy:hover { border-color: var(--accent); }
+.copy[data-done] { color: var(--gold); border-color: var(--gold); }
+@media (max-width: 30rem) {
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row .label { grid-column: 1 / -1; }
+}
+
+.trouble { display: grid; gap: 1rem; }
+.trouble dl { margin: 0; display: grid; gap: .9rem; }
+.trouble dt { font-weight: 700; }
+.trouble dd { margin: .15rem 0 0; color: var(--muted); }
+footer { border-top: 1px solid var(--rule); padding-top: 1rem; font-size: .9rem; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .copy { transition: color .15s, border-color .15s; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">Asheron's Call · private server</div>
+    <h1>Joining Project ACX</h1>
+    <p class="lede">Two downloads and about fifteen minutes. You don't need to have played Asheron's Call before, and you don't need to sign up anywhere: your account is made the first time you log in.</p>
+  </header>
+
+  <section class="needs" aria-labelledby="needs-h">
+    <h2 id="needs-h">What you need</h2>
+    <ul>
+      <li>A Windows PC with a graphics card from the last several years. Linux works too. There is no Mac version.</li>
+      <li>About 3 GB of free space.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="steps-h" style="display:grid;gap:1.25rem">
+    <h2 id="steps-h">Setting up</h2>
+    <ol class="steps">
+      <li>
+        <div class="step">
+          <h3>Install AC:Unreal, the game</h3>
+          <ol class="substeps">
+            <li>Go to <a href="https://thwargle.com/unreal/" target="_blank" rel="noopener">thwargle.com/unreal</a>. Under Windows, click the <span class="ui">Installer</span> download (a file named like <code>AC-Unreal-Setup-v159.exe</code>).</li>
+            <li>If your browser warns that the file isn't commonly downloaded, keep it anyway. In Edge: click the <span class="ui">…</span> next to the file, then <span class="ui">Keep</span>, then <span class="ui">Show more</span>, then <span class="ui">Keep anyway</span>. In Chrome: click <span class="ui">Keep</span>.</li>
+            <li>When it's done, click the file in your browser's download list to run it.</li>
+            <li>If a blue box says <span class="ui">Windows protected your PC</span>, click <span class="ui">More info</span>, then <span class="ui">Run anyway</span>.</li>
+            <li>Click through the installer. On the last screen, leave the boxes for the Microsoft runtimes ticked and click <span class="ui">Finish</span>.</li>
+          </ol>
+          <p class="note">These warnings show up because the installer isn't signed by a big company; it's safe. The game updates itself from then on.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step">
+          <h3>Download and unzip the game files</h3>
+          <ol class="substeps">
+            <li>Open the <a href="https://mega.nz/#!Q98n0BiR!p5IugPS8ZkQ7uX2A_LdN3Un2_wMX4gZBHowgs1Qomng" target="_blank" rel="noopener">game files on Mega</a> and click <span class="ui">Download</span>. Don't click "Save to Mega", which wants an account. Then pick <span class="ui">Standard download</span> if it asks.</li>
+            <li>Wait for it to finish. It's one file, <code>ac-updates.zip</code>, about 500 MB.</li>
+            <li>Open File Explorer: hold the <span class="ui">Windows key</span> and press <span class="ui">E</span>. (Or click the yellow folder on the taskbar.)</li>
+            <li>In the left column, click <span class="ui">Downloads</span>. Find <code>ac-updates.zip</code>.</li>
+            <li>Right-click it and choose <span class="ui">Extract All…</span></li>
+            <li>A window asks where to put the files. Click in the box, delete what's there, and paste this:
+              <div class="server path" role="group" aria-label="Folder for the game files">
+                <div class="row"><span class="label">Folder</span><span class="value" id="v-dat">C:\Games\AC-Data</span><button class="copy" type="button" id="c-dat" data-copy="v-dat">Copy</button></div>
+              </div>
+            </li>
+            <li>Click <span class="ui">Extract</span>. A folder opens with four files in it: <code>client_cell_1.dat</code>, <code>client_local_English.dat</code>, <code>client_portal.dat</code> and <code>acclient.exe</code>. That's right; you can close it.</li>
+          </ol>
+          <p class="note">Leave that folder where it is. The game reads from it every time you play.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step">
+          <h3>Tell the game where the files are</h3>
+          <ol class="substeps">
+            <li>Open AC:Unreal: click <span class="ui">Start</span> and type <span class="ui">AC</span>, then click <span class="ui">AC:Unreal</span>.</li>
+            <li>On the login screen, click the <span class="ui">Game files</span> tab.</li>
+            <li>Click in the <span class="ui">DAT folder</span> box, delete anything in it, and paste the same folder as before: <code>C:\Games\AC-Data</code></li>
+            <li>Click <span class="ui">Save location</span>. If it asks to restart, let it.</li>
+          </ol>
+          <p class="note">Linux: unzip into a folder in your home instead, and paste its full path, like <code>/home/yourname/Games/AC-Data</code>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step">
+          <h3>Add the server</h3>
+          <p>Click <span class="ui">Browse servers</span>, then <span class="ui">+ Custom server</span>, and fill it in:</p>
+          <div class="server" role="group" aria-label="Server settings">
+            <div class="row"><span class="label">Server name</span><span class="value" id="v-name">Project ACX</span><button class="copy" type="button" id="c-name" data-copy="v-name">Copy</button></div>
+            <div class="row"><span class="label">Hostname or IP address</span><span class="value" id="v-host">46.110.144.141</span><button class="copy" type="button" id="c-host" data-copy="v-host">Copy</button></div>
+            <div class="row"><span class="label">Port</span><span class="value" id="v-port">9000</span><button class="copy" type="button" id="c-port" data-copy="v-port">Copy</button></div>
+            <div class="row"><span class="label">Server type</span><span class="value">ACE</span><span></span></div>
+          </div>
+          <p>Click <span class="ui">Save server</span>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step">
+          <h3>Make up a login</h3>
+          <p>Open <span class="ui">Accounts</span>, click <span class="ui">New account</span>, and type a <span class="ui">Username</span> and <span class="ui">Password</span> of your choice. Click <span class="ui">Save account</span>.</p>
+          <p class="note">Nothing to register: the server creates the account the first time you log in with it. Use a password you don't use anywhere else.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step">
+          <h3>Log in and play</h3>
+          <p>Pick Project ACX and your account, click <span class="ui">Launch</span>, make a character, then click <span class="ui">Play</span>.</p>
+          <p>Your pack starts with the <span class="ui">ACX Guide</span>. Read it first: it explains what this server does differently.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="trouble" aria-labelledby="trouble-h">
+    <h2 id="trouble-h">If something goes wrong</h2>
+    <dl>
+      <div>
+        <dt>"Game files are missing"</dt>
+        <dd>The game can't find the files at the path in <span class="ui">DAT folder</span>. Open File Explorer, paste <code>C:\Games\AC-Data</code> into the bar at the top and press Enter. If the three <code>.dat</code> files aren't there, redo step 2. If they are, paste the path into the game again and click <span class="ui">Save location</span>.</dd>
+      </div>
+      <div>
+        <dt>It won't connect</dt>
+        <dd>Check the server settings above: address <code>46.110.144.141</code>, port <code>9000</code>, type ACE. If they're right, the server may be restarting for an update; try again in a few minutes.</dd>
+      </div>
+      <div>
+        <dt>Wrong password</dt>
+        <dd>The first login made your account with the password you typed then. If you've forgotten it, ask the server's admin to reset it.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer>AC:Unreal is made by Thwargle; the game files come from the emulator community's <a href="https://emulator.ac/how-to-play/" target="_blank" rel="noopener">how-to-play guide</a>. Project ACX runs on ACEmulator; its <a href="https://github.com/Detritus78/Project-ACX" target="_blank" rel="noopener">source code</a> is open (AGPL-3.0).</footer>
+</div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.copy);
+    var text = el.textContent.trim();
+    function done() {
+      btn.textContent = 'Copied';
+      btn.setAttribute('data-done', '');
+      setTimeout(function () { btn.textContent = 'Copy'; btn.removeAttribute('data-done'); }, 1600);
+    }
+    function selectIt() {
+      var range = document.createRange(); range.selectNodeContents(el);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      btn.textContent = 'Selected';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
+    }
+    try {
+      navigator.clipboard.writeText(text).then(done, selectIt);
+    } catch (e) { selectIt(); }
+  });
+});
+</script>
+</body>
+</html>
